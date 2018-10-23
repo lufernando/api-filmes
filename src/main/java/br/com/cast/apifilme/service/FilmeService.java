@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.cast.apifilme.client.FilmeCliente;
 import br.com.cast.apifilme.dto.FilmeDTO;
+import br.com.cast.apifilme.dto.ResultFilmeDTO;
 import br.com.cast.apifilme.entity.Filme;
 import br.com.cast.apifilme.repository.FilmeRepository;
 
@@ -19,14 +20,103 @@ public class FilmeService {
 	@Autowired
 	private FilmeRepository filmeRepository;
 	
-	public FilmeDTO getFilme(String titulo){
+	public ResultFilmeDTO getFilmeDetail(String id){
 		
-		List<Filme> entidadeBuscada = filmeRepository.buscarFilmes(titulo);
-		return null;
+		List<Filme> entidadeBuscada = filmeRepository.buscarFilme(id);
+		ResultFilmeDTO resultDTO = new ResultFilmeDTO();
 		
+		if(entidadeBuscada.size() != 0) {
+			
+			for (Filme dto : entidadeBuscada) {
+				
+				resultDTO = entidadeParaDto(dto);
+				
+			}
+			
+		}else {
+			FilmeDTO filme = filmeCliente.getFilmeDetalhado(id);
+				
+			resultDTO = apiParaDto(id, filme);
+			inserir(resultDTO);
+			
+		}
 		
-		
+		return resultDTO;
 		
 	}
+	
+	public void inserir(ResultFilmeDTO dto) {
+		
+		Filme filme = dtoParaEntidade(dto);
+		
+		filmeRepository.inserir(filme);
+	}
 
+	private Filme dtoParaEntidade(ResultFilmeDTO dto) {
+		Filme f = new Filme();
+		f.setAno(dto.getAno());
+		f.setClassificacao(dto.getClassificacao());
+		f.setDataLancamento(dto.getDataLancamento());
+		f.setDiretor(dto.getDiretor());
+		f.setDuracao(dto.getDuracao());
+		f.setElenco(dto.getElenco());
+		f.setEscritor(dto.getEscritor());
+		f.setGenero(dto.getGenero());
+		f.setId(dto.getId());
+		f.setLinguagem(dto.getLinguagem());
+		f.setPais(dto.getPais());
+		f.setPremios(dto.getPremios());
+		f.setProdutora(dto.getProdutora());
+		f.setSinopse(dto.getSinopse());
+		f.setSite(dto.getSite());
+		f.setTitulo(dto.getTitulo());
+		f.setPoster(dto.getPoster());
+		return f;
+	}
+
+	private ResultFilmeDTO apiParaDto(String id, FilmeDTO filme) {
+		ResultFilmeDTO resultDto = new ResultFilmeDTO();
+		resultDto.setId(id);
+		resultDto.setTitulo(filme.getTitulo());
+		resultDto.setAno(filme.getAno());
+		resultDto.setClassificacao(filme.getClassificacao());
+		resultDto.setDataLancamento(filme.getDataLancamento());
+		resultDto.setDiretor(filme.getDiretor());
+		resultDto.setDuracao(filme.getDuracao());
+		resultDto.setElenco(filme.getElenco());
+		resultDto.setEscritor(filme.getEscritor());
+		resultDto.setGenero(filme.getGenero());
+		resultDto.setId(filme.getId());
+		resultDto.setLinguagem(filme.getLinguagem());
+		resultDto.setPais(filme.getPais());
+		resultDto.setPremios(filme.getPremios());
+		resultDto.setProdutora(filme.getProdutora());
+		resultDto.setSinopse(filme.getSinopse());
+		resultDto.setSite(filme.getSite());
+		resultDto.setPoster(filme.getPoster());
+		return resultDto;
+	}
+
+	private ResultFilmeDTO entidadeParaDto(Filme dto) {
+		ResultFilmeDTO resultadoDTO = new ResultFilmeDTO();
+		resultadoDTO.setAno(dto.getAno());
+		resultadoDTO.setClassificacao(dto.getClassificacao());
+		resultadoDTO.setDataLancamento(dto.getDataLancamento());
+		resultadoDTO.setDiretor(dto.getDiretor());
+		resultadoDTO.setDuracao(dto.getDuracao());
+		resultadoDTO.setElenco(dto.getElenco());
+		resultadoDTO.setEscritor(dto.getEscritor());
+		resultadoDTO.setGenero(dto.getGenero());
+		resultadoDTO.setId(dto.getId());
+		resultadoDTO.setLinguagem(dto.getLinguagem());
+		resultadoDTO.setPais(dto.getLinguagem());
+		resultadoDTO.setPremios(dto.getPremios());
+		resultadoDTO.setProdutora(dto.getProdutora());
+		resultadoDTO.setSinopse(dto.getSinopse());
+		resultadoDTO.setSite(dto.getSite());
+		resultadoDTO.setTitulo(dto.getTitulo());
+		resultadoDTO.setPoster(dto.getPoster());
+		return resultadoDTO;
+	}
+	
 }

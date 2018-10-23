@@ -18,9 +18,14 @@ public class ResultFilmeDTO {
 	private String premios;
 	private String produtora;
 	private String site;
-	private String fonte;
-	private String valor;
+	private String poster;
 	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	public String getId() {
 		return id;
 	}
@@ -116,18 +121,6 @@ public class ResultFilmeDTO {
 	}
 	public void setSite(String site) {
 		this.site = site;
-	}
-	public String getFonte() {
-		return fonte;
-	}
-	public void setFonte(String fonte) {
-		this.fonte = fonte;
-	}
-	public String getValor() {
-		return valor;
-	}
-	public void setValor(String valor) {
-		this.valor = valor;
 	}
 
 }

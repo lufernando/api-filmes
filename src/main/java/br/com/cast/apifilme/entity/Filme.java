@@ -1,7 +1,5 @@
 package br.com.cast.apifilme.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +14,8 @@ public class Filme {
 	private String titulo;
 	private String ano;
 	private String classificacao;
-	private Date dataLancamento;
+	@Column(name="datalancamento")
+	private String dataLancamento;
 	private String duracao;
 	private String genero;
 	private String diretor;
@@ -28,22 +27,13 @@ public class Filme {
 	private String premios;
 	private String produtora;
 	private String site;
-	@Column(name="rating_fonte")
-	private String fonte;
-	@Column(name="rating_valor")
-	private String valor;
+	private String poster;
 	
-	public String getFonte() {
-		return fonte;
+	public String getPoster() {
+		return poster;
 	}
-	public void setFonte(String fonte) {
-		this.fonte = fonte;
-	}
-	public String getValor() {
-		return valor;
-	}
-	public void setValor(String valor) {
-		this.valor = valor;
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -63,10 +53,10 @@ public class Filme {
 	public void setClassificacao(String classificacao) {
 		this.classificacao = classificacao;
 	}
-	public Date getDataLancamento() {
+	public String getDataLancamento() {
 		return dataLancamento;
 	}
-	public void setDataLancamento(Date dataLancamento) {
+	public void setDataLancamento(String dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
 	public String getDuracao() {

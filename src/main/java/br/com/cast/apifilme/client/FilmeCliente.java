@@ -9,7 +9,8 @@ import br.com.cast.apifilme.dto.FilmeDTO;
 @Component
 public class FilmeCliente {
 	
-	private static final String URL_BUSCA_FILMES = "http://www.omdbapi.com/?apikey={appid}&t={titulo}";
+	private static final String URL_BUSCA_FILMES_DETALHADO = "http://www.omdbapi.com/?apikey={appid}&t={titulo}";
+	private static final String URL_BUSCA_LISTA = "http://www.omdbapi.com/?apikey={appid}&s={titulo}";
 	private static final String APPID = "62bb8ac";
 	private RestTemplate client;
 	
@@ -17,8 +18,15 @@ public class FilmeCliente {
 		this.client = builder.build();
 	}
 	
-	public FilmeDTO getFilmes(String titulo) {
-		FilmeDTO filmeDTO = this.client.getForObject(URL_BUSCA_FILMES, FilmeDTO.class, titulo, APPID);
+	public FilmeDTO getFilmeDetalhado(String titulo) {
+		FilmeDTO filmeDTO = this.client.getForObject(URL_BUSCA_FILMES_DETALHADO, FilmeDTO.class, APPID ,titulo);
 		return filmeDTO;
 	}
+	
+	public FilmeDTO getListaFilmes(String titulo) {
+		FilmeDTO filmeDTO = this.client.getForObject(URL_BUSCA_LISTA, FilmeDTO.class, titulo, APPID);
+		return filmeDTO;
+	}
+	
+	
 }

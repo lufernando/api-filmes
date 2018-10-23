@@ -7,35 +7,32 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import org.springframework.stereotype.Repository;
+import br.com.cast.apifilme.entity.FilmeGenerico;
 
-import br.com.cast.apifilme.entity.Filme;
-
-@Repository
-public class FilmeRepository {
+public class FilmeGenericoRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@SuppressWarnings("unchecked")
-	public List<Filme> buscarFilme(String id) {
+	public List<FilmeGenerico> buscarFilme(String titulo) {
 		
 		StringBuilder jpql = new StringBuilder();
 		
 		jpql.append("FROM ")
-			.append(Filme.class.getName())
-			.append(" WHERE id = (:id)");
+			.append(FilmeGenerico.class.getName())
+			.append(" WHERE titulo = (:titulo)");
 		
 		Query query = entityManager.createQuery(jpql.toString());
 		
-		query.setParameter("id", id);
+		query.setParameter("titulo", titulo);
 		
 		return query.getResultList();
 	}
 	
 	@Transactional
-	public void inserir(Filme filme) {
-		entityManager.persist(filme);
+	public void inserir(FilmeGenerico filmeGenerico) {
+		entityManager.persist(filmeGenerico);
 	}
 	
 }
