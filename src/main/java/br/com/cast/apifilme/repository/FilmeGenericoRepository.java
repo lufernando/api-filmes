@@ -22,19 +22,16 @@ public class FilmeGenericoRepository {
 		
 		StringBuilder jpql = new StringBuilder();
 		
-		jpql.append("SELECT fg FROM ")
+		jpql.append("FROM ")
 			.append(FilmeGenerico.class.getName()).append(" fg ")
-			.append(" LEFT JOIN f.filme f ")
-			.append(" WHERE 1=1 ")
-			.append(" AND UPPER(fg.titulo) LIKE :titulo ");
+			.append(" WHERE ")
+			.append(" UPPER(fg.titulo) LIKE :titulo ");
 		
 		Query query = entityManager.createQuery(jpql.toString());
 		
 		query.setParameter("titulo","%" + titulo.toUpperCase() + "%");
 		
-		List<FilmeGenerico> filmeGenericos = query.getResultList();
-		
-		return filmeGenericos;
+		return query.getResultList(); 
 	}
 	
 	@Transactional

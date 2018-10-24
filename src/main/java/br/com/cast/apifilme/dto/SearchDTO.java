@@ -16,6 +16,7 @@ public class SearchDTO {
 	private String tipo;
 	@JsonProperty("Poster")
 	private String poster;
+	
 	private Filme filme;
 	
 	public Filme getFilme() {

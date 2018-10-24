@@ -52,6 +52,8 @@ public class FilmeService {
 		filmeRepository.inserir(filme);
 	}
 
+	
+	//--------CONVERSÕES--------
 	private Filme dtoParaEntidade(ResultFilmeDTO dto) {
 		Filme f = new Filme();
 		f.setAno(dto.getAno());

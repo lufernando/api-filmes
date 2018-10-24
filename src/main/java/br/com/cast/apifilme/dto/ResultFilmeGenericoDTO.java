@@ -1,7 +1,6 @@
 package br.com.cast.apifilme.dto;
 
 import br.com.cast.apifilme.entity.Filme;
-import br.com.cast.apifilme.entity.FilmeGenerico;
 
 public class ResultFilmeGenericoDTO {
 	
@@ -48,21 +47,5 @@ public class ResultFilmeGenericoDTO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-	public static ResultFilmeGenericoDTO paraEntidade(FilmeGenerico f) {
-		if(f == null) return null;
-		
-		ResultFilmeGenericoDTO dto = new ResultFilmeGenericoDTO();
-		dto.setAno(f.getAno());
-		dto.setFilme(f.getFilme());
-		dto.setId_search(f.getId());
-		dto.setPoster(f.getPoster());
-		dto.setTipo(f.getTipo());
-		dto.setTitulo(f.getTitulo());
-		
-		return dto;
-		
-	}
-	
-	
 	
 }
