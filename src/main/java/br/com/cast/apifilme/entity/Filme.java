@@ -27,14 +27,7 @@ public class Filme {
 	private String premios;
 	private String produtora;
 	private String site;
-	private String poster;
 	
-	public String getPoster() {
-		return poster;
-	}
-	public void setPoster(String poster) {
-		this.poster = poster;
-	}
 	public String getTitulo() {
 		return titulo;
 	}

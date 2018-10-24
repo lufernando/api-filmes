@@ -1,8 +1,10 @@
 package br.com.cast.apifilme.entity;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +17,10 @@ public class FilmeGenerico {
 	private String ano;
 	private String tipo;
 	private String poster;
-	@Column(name="id_detalhe")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_filme_generico")
 	private Filme filme;
+	
 	public String getId() {
 		return id;
 	}

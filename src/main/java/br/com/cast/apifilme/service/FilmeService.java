@@ -70,7 +70,6 @@ public class FilmeService {
 		f.setSinopse(dto.getSinopse());
 		f.setSite(dto.getSite());
 		f.setTitulo(dto.getTitulo());
-		f.setPoster(dto.getPoster());
 		return f;
 	}
 
@@ -115,7 +114,6 @@ public class FilmeService {
 		resultadoDTO.setSinopse(dto.getSinopse());
 		resultadoDTO.setSite(dto.getSite());
 		resultadoDTO.setTitulo(dto.getTitulo());
-		resultadoDTO.setPoster(dto.getPoster());
 		return resultadoDTO;
 	}
 	

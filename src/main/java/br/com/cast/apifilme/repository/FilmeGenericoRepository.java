@@ -7,8 +7,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.cast.apifilme.entity.FilmeGenerico;
 
+@Repository
 public class FilmeGenericoRepository {
 	
 	@PersistenceContext
@@ -19,15 +22,19 @@ public class FilmeGenericoRepository {
 		
 		StringBuilder jpql = new StringBuilder();
 		
-		jpql.append("FROM ")
-			.append(FilmeGenerico.class.getName())
-			.append(" WHERE titulo = (:titulo)");
+		jpql.append("SELECT fg FROM ")
+			.append(FilmeGenerico.class.getName()).append(" fg ")
+			.append(" LEFT JOIN f.filme f ")
+			.append(" WHERE 1=1 ")
+			.append(" AND UPPER(fg.titulo) LIKE :titulo ");
 		
 		Query query = entityManager.createQuery(jpql.toString());
 		
-		query.setParameter("titulo", titulo);
+		query.setParameter("titulo","%" + titulo.toUpperCase() + "%");
 		
-		return query.getResultList();
+		List<FilmeGenerico> filmeGenericos = query.getResultList();
+		
+		return filmeGenericos;
 	}
 	
 	@Transactional
@@ -35,4 +42,12 @@ public class FilmeGenericoRepository {
 		entityManager.persist(filmeGenerico);
 	}
 	
+	public FilmeGenerico buscaPorId(String id) {
+		return entityManager.find(FilmeGenerico.class, id);
+	}
+	
+	@Transactional
+	public void alterar(FilmeGenerico filmeGenerico) {
+		entityManager.merge(filmeGenerico);
+	}
 }

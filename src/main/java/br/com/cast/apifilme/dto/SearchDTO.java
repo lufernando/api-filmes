@@ -2,6 +2,8 @@ package br.com.cast.apifilme.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.cast.apifilme.entity.Filme;
+
 public class SearchDTO {
 	
 	@JsonProperty("Title")
@@ -14,7 +16,14 @@ public class SearchDTO {
 	private String tipo;
 	@JsonProperty("Poster")
 	private String poster;
+	private Filme filme;
 	
+	public Filme getFilme() {
+		return filme;
+	}
+	public void setFilme(Filme filme) {
+		this.filme = filme;
+	}
 	public String getTitulo() {
 		return titulo;
 	}

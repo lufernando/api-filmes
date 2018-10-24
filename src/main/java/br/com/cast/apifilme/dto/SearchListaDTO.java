@@ -8,5 +8,15 @@ public class SearchListaDTO {
 	
 	@JsonProperty("Search")
 	List<SearchDTO> listaSearchDTO;
+
+	public List<SearchDTO> getListaSearchDTO() {
+		return listaSearchDTO;
+	}
+
+	public void setListaSearchDTO(List<SearchDTO> listaSearchDTO) {
+		this.listaSearchDTO = listaSearchDTO;
+	}
+	
+	
 	
 }
