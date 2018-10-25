@@ -47,4 +47,16 @@ public class FilmeGenericoRepository {
 	public void alterar(FilmeGenerico filmeGenerico) {
 		entityManager.merge(filmeGenerico);
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<FilmeGenerico> buscarFilmeInicial() {
+		
+		StringBuilder jpql = new StringBuilder();
+
+		jpql.append("FROM ").append(FilmeGenerico.class.getName()).append(" fg ");
+		
+		Query query = entityManager.createQuery(jpql.toString());
+		
+		return query.getResultList();
+	}
 }

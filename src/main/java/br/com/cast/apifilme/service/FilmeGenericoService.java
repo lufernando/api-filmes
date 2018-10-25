@@ -76,6 +76,14 @@ public class FilmeGenericoService {
 		return result;
 	}
 	
+	public List<ResultFilmeGenericoDTO> getListaFilmeInicial() {
+		
+		List<FilmeGenerico> listaInicial = filmeGenericoRepository.buscarFilmeInicial();
+		List<ResultFilmeGenericoDTO> listaGenerica = entidadeGenericaParaDTO(listaInicial);
+		
+		return listaGenerica;
+	}
+	
 	
 	//----------CONVERSÕES-----------
 	
@@ -133,5 +141,6 @@ public class FilmeGenericoService {
 		
 		return r;
 	}
+
 
 }

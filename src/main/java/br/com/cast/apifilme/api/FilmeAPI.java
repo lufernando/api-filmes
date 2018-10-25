@@ -35,10 +35,16 @@ public class FilmeAPI {
 		return filmeGenericoservice.getListaFilme(titulo);
 	}
 	
+	// BUSCA NO BANCO
+	@GetMapping(path = "/buscaInicial")
+	public List<ResultFilmeGenericoDTO> getListaInicial() {
+		return filmeGenericoservice.getListaFilmeInicial();
+	}
+	
 	// BUSCA NA API
 	@GetMapping(path = "/api/{titulo}")
 	public List<ResultFilmeGenericoDTO> getListaFilmesApi(@PathVariable("titulo") String titulo) {
-		return filmeGenericoservice.getListaFilme(titulo);
+		return filmeGenericoservice.getListaGenerica(titulo);
 	}
 
 }
