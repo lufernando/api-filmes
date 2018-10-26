@@ -38,4 +38,8 @@ public class FilmeRepository {
 		entityManager.persist(filme);
 	}
 	
+	public Filme buscaPorId(String id) {
+		return entityManager.find(Filme.class, id);
+	}
+	
 }

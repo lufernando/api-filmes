@@ -1,5 +1,7 @@
 package br.com.cast.apifilme.dto;
 
+import br.com.cast.apifilme.entity.Filme;
+
 public class ResultFilmeDTO {
 	
 	private String id;
@@ -121,6 +123,28 @@ public class ResultFilmeDTO {
 	}
 	public void setSite(String site) {
 		this.site = site;
+	}
+	public static ResultFilmeDTO fromFilme(Filme f) {
+		if (f == null) return null;
+		ResultFilmeDTO dto = new ResultFilmeDTO();
+		dto.setAno(f.getAno());
+		dto.setClassificacao(f.getClassificacao());
+		dto.setDataLancamento(f.getDataLancamento());
+		dto.setDiretor(f.getDiretor());
+		dto.setDuracao(f.getDuracao());
+		dto.setElenco(f.getElenco());
+		dto.setEscritor(f.getEscritor());
+		dto.setGenero(f.getGenero());
+		dto.setId(f.getId());
+		dto.setLinguagem(f.getLinguagem());
+		dto.setPais(f.getLinguagem());
+		dto.setPremios(f.getPremios());
+		dto.setProdutora(f.getProdutora());
+		dto.setSinopse(f.getSinopse());
+		dto.setSite(f.getSite());
+		dto.setTitulo(f.getTitulo());
+		
+		return dto;
 	}
 
 }

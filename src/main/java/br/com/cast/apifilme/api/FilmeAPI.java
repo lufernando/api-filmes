@@ -42,9 +42,14 @@ public class FilmeAPI {
 	}
 	
 	// BUSCA NA API
-	@GetMapping(path = "/api/{titulo}")
+	@GetMapping(path = "/buscaNaApi/{titulo}")
 	public List<ResultFilmeGenericoDTO> getListaFilmesApi(@PathVariable("titulo") String titulo) {
 		return filmeGenericoservice.getListaGenerica(titulo);
+	}
+	
+	@GetMapping(path="/listaGenerica/{id}")
+	public ResultFilmeGenericoDTO getFilmePorId(@PathVariable("id") String id){
+		return service.getFilmePorId(id);
 	}
 
 }

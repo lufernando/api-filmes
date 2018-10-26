@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.cast.apifilme.dto.FilmeDTO;
+
 @Entity
 @Table(name="filme", schema="filmeapi")
 public class Filme {
@@ -123,6 +125,27 @@ public class Filme {
 	}
 	public void setSite(String site) {
 		this.site = site;
+	}
+	
+	public static Filme deFilmeDTO(FilmeDTO dto) {
+		Filme f = new Filme();
+		f.setAno(dto.getAno());
+		f.setClassificacao(dto.getClassificacao());
+		f.setDataLancamento(dto.getDataLancamento());
+		f.setDiretor(dto.getDiretor());
+		f.setDuracao(dto.getDuracao());
+		f.setElenco(dto.getElenco());
+		f.setEscritor(dto.getEscritor());
+		f.setGenero(dto.getGenero());
+		f.setId(dto.getId());
+		f.setLinguagem(dto.getLinguagem());
+		f.setPais(dto.getPais());
+		f.setPremios(dto.getPremios());
+		f.setProdutora(dto.getProdutora());
+		f.setSinopse(dto.getSinopse());
+		f.setSite(dto.getSite());
+		f.setTitulo(dto.getTitulo());
+		return f;
 	}
 	
 }

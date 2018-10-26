@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.cast.apifilme.dto.ResultFilmeDTO;
+
 @Entity
 @Table(name="filmegenerico", schema="filmeapi")
 public class FilmeGenerico {
@@ -57,6 +59,27 @@ public class FilmeGenerico {
 	}
 	public void setFilme(Filme filme) {
 		this.filme = filme;
+	}
+	public static Filme fromDto(ResultFilmeDTO dto) {
+		Filme f = new Filme();
+		f.setAno(dto.getAno());
+		f.setClassificacao(dto.getClassificacao());
+		f.setDataLancamento(dto.getDataLancamento());
+		f.setDiretor(dto.getDiretor());
+		f.setDuracao(dto.getDuracao());
+		f.setElenco(dto.getElenco());
+		f.setEscritor(dto.getEscritor());
+		f.setGenero(dto.getGenero());
+		f.setId(dto.getId());
+		f.setLinguagem(dto.getLinguagem());
+		f.setPais(dto.getPais());
+		f.setPremios(dto.getPremios());
+		f.setProdutora(dto.getProdutora());
+		f.setSinopse(dto.getSinopse());
+		f.setSite(dto.getSite());
+		f.setTitulo(dto.getTitulo());
+		
+		return f;
 	} 
 
 }

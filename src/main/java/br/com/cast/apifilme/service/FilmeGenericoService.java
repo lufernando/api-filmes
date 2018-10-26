@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.cast.apifilme.client.FilmeCliente;
+import br.com.cast.apifilme.dto.ResultFilmeDTO;
 import br.com.cast.apifilme.dto.ResultFilmeGenericoDTO;
 import br.com.cast.apifilme.dto.SearchDTO;
 import br.com.cast.apifilme.dto.SearchListaDTO;
@@ -84,8 +85,20 @@ public class FilmeGenericoService {
 		return listaGenerica;
 	}
 	
-	
 	//----------CONVERSÕES-----------
+	
+	@SuppressWarnings("unused")
+	private ResultFilmeGenericoDTO entidadeUnicaParaDto(FilmeGenerico entidade) {
+		ResultFilmeGenericoDTO r = new ResultFilmeGenericoDTO();
+		r.setAno(entidade.getAno());
+		r.setFilme(ResultFilmeDTO.fromFilme(entidade.getFilme()));
+		r.setId_search(entidade.getId());
+		r.setPoster(entidade.getPoster());
+		r.setTipo(entidade.getTipo());
+		r.setTitulo(entidade.getTitulo());
+		
+		return r;
+	}
 	
 	private List<FilmeGenerico> dtoParaEntidade(List<ResultFilmeGenericoDTO> result) {
 		List<FilmeGenerico> fGenerico = new ArrayList<>();
@@ -93,7 +106,7 @@ public class FilmeGenericoService {
 		for (ResultFilmeGenericoDTO dto : result) {
 			FilmeGenerico e = new FilmeGenerico();
 			e.setAno(dto.getAno());
-			e.setFilme(dto.getFilme());
+			e.setFilme(FilmeGenerico.fromDto(dto.getFilme()));
 			e.setId(dto.getId_search());
 			e.setPoster(dto.getPoster());
 			e.setTipo(dto.getTipo());
@@ -112,7 +125,7 @@ public class FilmeGenericoService {
 		for (SearchDTO sl : listaDTO) {
 			ResultFilmeGenericoDTO result = new ResultFilmeGenericoDTO();
 			result.setAno(sl.getAno());
-			result.setFilme(sl.getFilme());
+			result.setFilme(ResultFilmeGenericoDTO.fromDTO(sl.getFilme()));
 			result.setId_search(sl.getId_search());
 			result.setPoster(sl.getPoster());
 			result.setTipo(sl.getTipo());
@@ -129,7 +142,7 @@ public class FilmeGenericoService {
 		for (FilmeGenerico entidade : listaDeEntidade) {
 			ResultFilmeGenericoDTO fg = new ResultFilmeGenericoDTO();
 			fg.setAno(entidade.getAno());
-			fg.setFilme(entidade.getFilme());
+			fg.setFilme(ResultFilmeDTO.fromFilme(entidade.getFilme()));
 			fg.setId_search(entidade.getId());
 			fg.setPoster(entidade.getPoster());
 			fg.setTipo(entidade.getTipo());

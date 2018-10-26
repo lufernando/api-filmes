@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import br.com.cast.apifilme.client.FilmeCliente;
 import br.com.cast.apifilme.dto.FilmeDTO;
 import br.com.cast.apifilme.dto.ResultFilmeDTO;
+import br.com.cast.apifilme.dto.ResultFilmeGenericoDTO;
 import br.com.cast.apifilme.entity.Filme;
+import br.com.cast.apifilme.entity.FilmeGenerico;
+import br.com.cast.apifilme.repository.FilmeGenericoRepository;
 import br.com.cast.apifilme.repository.FilmeRepository;
 
 @Service
@@ -19,6 +22,9 @@ public class FilmeService {
 	
 	@Autowired
 	private FilmeRepository filmeRepository;
+	
+	@Autowired
+	private FilmeGenericoRepository filmeGenericoRepository;
 	
 	public ResultFilmeDTO getFilmeDetail(String id){
 		
@@ -51,9 +57,27 @@ public class FilmeService {
 		
 		filmeRepository.inserir(filme);
 	}
+	
+	public ResultFilmeGenericoDTO getFilmePorId(String id) {
+		FilmeGenerico filmao = filmeGenericoRepository.buscaPorId(id);
+		
+		if(filmao.getFilme() == null) {
+			
+			FilmeDTO detalheExterno = filmeCliente.getFilmeDetalhado(id);
+			
+			Filme filmeDetalhe = Filme.deFilmeDTO(detalheExterno);
+			
+			filmao.setFilme(filmeDetalhe);
+			filmeGenericoRepository.alterar(filmao);
+		}
+		
+		return ResultFilmeGenericoDTO.deFilmeGenerico(filmao);
+		
+	}
 
 	
 	//--------CONVERSÕES--------
+	
 	private Filme dtoParaEntidade(ResultFilmeDTO dto) {
 		Filme f = new Filme();
 		f.setAno(dto.getAno());
@@ -118,5 +142,6 @@ public class FilmeService {
 		resultadoDTO.setTitulo(dto.getTitulo());
 		return resultadoDTO;
 	}
+
 	
 }
